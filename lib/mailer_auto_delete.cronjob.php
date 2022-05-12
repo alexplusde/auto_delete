@@ -1,6 +1,6 @@
 <?php
 
-class rex_cronjob_deleted_phpmailerlogs extends rex_cronjob
+class rex_cronjob_mailer_auto_delete extends rex_cronjob
 {
     public function execute()
     {

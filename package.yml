@@ -11,38 +11,8 @@ requires:
     packages:
         yform: "^4"
 
-
-
 page:
     title: translate:auto_delete_title
     prio: 100
     icon: rex-icon fa-gear
-
-pages:
-    auto_delete: 
-        title: translate:auto_delete_title
-
-        block: system               
-        prio: 15                    
-        icon: rex-icon fa-calendar  
-        perm: auto_delete[]               
-        subpages:                   
-            rules:
-                title: translate:auto_delete_rules
-                icon: rex-icon fa-gear
-                itemclass: pull-right
-                perm: admin
-            settings:
-                title: translate:auto_delete_settings
-                icon: rex-icon fa-gear
-                itemclass: pull-right
-                perm: admin
-            docs:
-                title: translate:auto_delete_docs
-                subPath: README.md  
-                icon: rex-icon fa-info-circle
-                itemclass: pull-right
-                perm: auto_delete[docs]
-
-default_config:
-    field: 'Test' 
+    hidden: true
