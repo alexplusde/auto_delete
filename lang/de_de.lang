@@ -5,3 +5,6 @@ auto_delete_config = Einstellungen
 auto_delete_rules = Regeln
 
 # YForm Tablelen-Übersetzung
+
+# YForm Feld
+yform_values_datestamp_auto_delete_offset = Offset (in PHP-Format strtotime(), z.B. <code>+ 3 months</code>)
