@@ -10,7 +10,7 @@ requires:
     redaxo: ^5.13
     packages:
         yform: "^4"
-        cronjob: ">2.8.2"
+        cronjob: "^2.8.2"
 
 page:
     title: translate:auto_delete_title
