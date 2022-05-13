@@ -12,7 +12,7 @@ class rex_cronjob_table_auto_delete extends rex_cronjob
 
     public function getTypeName()
     {
-        return rex_i18n::msg('deleted_database_cronjob_name');
+        return rex_i18n::msg('auto_delete_table');
     }
 
     public function getParamFields()

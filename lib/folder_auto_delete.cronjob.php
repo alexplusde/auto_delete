@@ -2,7 +2,7 @@
 
 class rex_cronjob_folder_auto_delete extends rex_cronjob
 {
-    private function purgeDir(int $days = 7, string $dir = ''): int
+    private function purgeDir(int $days = 31, string $dir = ''): int
     {
         $log = 0;
         $files = glob($dir . '/*');
