@@ -4,7 +4,7 @@ class rex_cronjob_folder_auto_delete extends rex_cronjob
 {
     private function purgeDir(int $days = 31, string $dir = ''): int
     {
-        $dir = rex_path::basename($dir);
+        $dir = rex_path::base.$dir;
         $log = 0;
         $files = glob($dir . '/*');
         if ($files) {
@@ -49,6 +49,41 @@ class rex_cronjob_folder_auto_delete extends rex_cronjob
 
     public function getParamFields()
     {
+        $folders = [];
+
+        foreach ($iterator = new RecursiveIteratorIterator(
+            new RecursiveDirectoryIterator(
+                rex_path::data(),
+                RecursiveDirectoryIterator::SKIP_DOTS
+            ),
+            RecursiveIteratorIterator::SELF_FIRST
+        ) as $item) {
+            // Note SELF_FIRST, so array keys are in place before values are pushed.
+
+            $subPath = $iterator->getSubPathName();
+            if ($item->isDir()) {
+                // Create a new array key of the current directory name.
+                $folders[rex_path::data().$subPath] = rex_path::data().$subPath;
+            }
+        }
+
+        foreach ($iterator = new RecursiveIteratorIterator(
+            new RecursiveDirectoryIterator(
+                rex_path::cache(),
+                RecursiveDirectoryIterator::SKIP_DOTS
+            ),
+            RecursiveIteratorIterator::SELF_FIRST
+        ) as $item) {
+            // Note SELF_FIRST, so array keys are in place before values are pushed.
+
+            $subPath = $iterator->getSubPathName();
+            if ($item->isDir()) {
+                // Create a new array key of the current directory name.
+                $folders[rex_path::cache().$subPath] = rex_path::cache().$subPath;
+            }
+        }
+
+
         return [
             [
                 'label' => rex_i18n::msg('auto_delete_folder_days_label'),
@@ -65,9 +100,12 @@ class rex_cronjob_folder_auto_delete extends rex_cronjob
             ],[
                 'label' => rex_i18n::msg('auto_delete_folder_label'),
                 'name' => 'dir',
-                'type' => 'text',
-                'default' => rex_path::coreCache(),
-            ],
+                'type' => 'select',
+                'attributes'=>["class" => 'form-control selectpicker'],
+                'options' => $folders,
+                'default' => 7,
+                'notice' => rex_path::data(),
+            ]
         ];
     }
 }

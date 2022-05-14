@@ -16,7 +16,7 @@ auto_delete_folder_days_label
 auto_delete_folder_days = Tage
 auto_delete_folder_label = Absoluter Ordner-Pfad
 
-auto_delete_table = Lösche Datensätze in einer gewählten Datenbank-Tabelle nach einer bestimmten Zeite
+auto_delete_table = Lösche Datensätze in einer gewählten Datenbank-Tabelle nach einer bestimmten Zeit
 auto_delete_table_cronjob_rex_table_label = Name der Tabelle
 auto_delete_table_cronjob_rex_table_notice = z.B. <code>rex_article_history</code>
 auto_delete_table_cronjob_field_label = Feld
