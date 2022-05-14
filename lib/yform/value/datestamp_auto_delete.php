@@ -28,9 +28,9 @@ class rex_yform_value_datestamp_auto_delete extends rex_yform_value_datestamp
                 'format' => ['type' => 'choice', 'label' => rex_i18n::msg('yform_values_datetime_format'), 'choices' => rex_yform_value_datetime::VALUE_DATETIME_FORMATS, 'default' => rex_yform_value_datetime::VALUE_DATETIME_DEFAULT_FORMAT],
                 'no_db' => ['type' => 'no_db',   'label' => rex_i18n::msg('yform_values_defaults_table'),  'default' => 0],
                 'only_empty' => ['type' => 'choice',  'label' => rex_i18n::msg('yform_values_datestamp_only_empty'), 'default' => '0', 'choices' => 'translate:yform_always=0,translate:yform_onlyifempty=1,translate:yform_never=2'],
-                'offset' => ['type' => 'text',   'label' => rex_i18n::msg('yform_values_datestamp_auto_delete_offset'),  'default' => '6 MONTH'],
+                'offset' => ['type' => 'text',   'label' => rex_i18n::msg('yform_values_datestamp_auto_delete_offset'), 'notice' => rex_i18n::msg('yform_values_datestamp_auto_delete_offset_notice'),  'default' => '+6 months'],
             ],
-            'description' => rex_i18n::msg('yform_values_datestamp_description'),
+            'description' => rex_i18n::msg('yform_values_datestamp_auto_delete_description'),
             'db_type' => ['datetime'],
             'multi_edit' => false,
         ];
