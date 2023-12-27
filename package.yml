@@ -1,5 +1,5 @@
 package: auto_delete 
-version: '1.0' 
+version: '1.0.0'
 author: 'Alexander Walther' 
 supportpage: https://github.com/alexplusde/auto_delete 
 
