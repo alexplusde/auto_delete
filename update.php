@@ -1,3 +1,4 @@
 <?php
 
-// auto_delete::updateCronjob();
+$addon = rex_addon::get('auto_delete');
+$addon->includeFile(__DIR__ . '/install.php');
