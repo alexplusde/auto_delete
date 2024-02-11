@@ -6,13 +6,13 @@ auto_delete_title: Automatisches Löschen
 # YForm Feld
 yform_values_datestamp_auto_delete_offset = Löschen nach...
 yform_values_datestamp_auto_delete_offset_notice =in PHP-Format <code>strtotime()</code>, z.B. <code>+ 6 months</code> oder <code>next Monday</code> oder <code>31 December 2025</code>. Siehe <a href="https://www.php.net/manual/de/function.strtotime.php" target="_blank">PHP-Docs</a>
-yform_values_datestamp_auto_delete_description = Ein <code>datestamp</code>-Feld, mit einem Lösch-Datum in der Zukunft.
+yform_values_datestamp_auto_delete_description = 🧩 Auto Delete: Ein <code>datestamp</code>-Feld, mit einem Lösch-Datum in der Zukunft.
 
 auto_delete_yform = Lösche YForm-Datensätze anhand des Felds datestamp_auto_delete
 auto_delete_yform_cronjob_message = Datensätze wurden erfolgreich gelöscht.
 
 auto_delete_folder = Lösche Dateien in einem gewählten Verzeichnis
-auto_delete_folder_days_label
+auto_delete_folder_days_label = Lösche Dateien nach einer bestimmten Zeit
 auto_delete_folder_days = Tage
 auto_delete_folder_label = Absoluter Ordner-Pfad
 
