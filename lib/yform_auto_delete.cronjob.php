@@ -14,7 +14,5 @@ class rex_cronjob_yform_auto_delete extends rex_cronjob
         return rex_i18n::msg('auto_delete_yform');
     }
 
-    public function getParamFields()
-    {
-    }
+    public function getParamFields() {}
 }

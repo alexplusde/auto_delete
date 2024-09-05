@@ -5,28 +5,28 @@ class auto_delete
     public static function yform_auto_delete()
     {
         foreach (rex_sql::factory()->getArray('SELECT  * FROM `' . rex::getTable('yform_field') . '` WHERE `type_name` = "datestamp_auto_delete" ') as $field) {
-            rex_sql::factory()->setQuery('DELETE FROM '.$field['table_name'].' WHERE '.$field['name'] .' < NOW()');
+            rex_sql::factory()->setQuery('DELETE FROM ' . $field['table_name'] . ' WHERE ' . $field['name'] . ' < NOW()');
         }
     }
 
-    
     public static function writeCronjob()
     {
         $cronjobs = rex_sql::factory()->setDebug(0)->getArray("SELECT * FROM rex_cronjob WHERE `type` LIKE '%_auto_delete'");
 
         foreach ($cronjobs as $cronjob) {
-            rex_file::put(rex_path::addon("auto_delete", "cronjob/".$cronjob['type'].".json"), json_encode($cronjob));
+            rex_file::put(rex_path::addon('auto_delete', 'cronjob/' . $cronjob['type'] . '.json'), json_encode($cronjob));
         }
     }
+
     public static function updateCronjob()
     {
-        $cronjobs = scandir(rex_path::addon('auto_delete').'cronjob');
+        $cronjobs = scandir(rex_path::addon('auto_delete') . 'cronjob');
 
         foreach ($cronjobs as $cronjob) {
             if ('.' == $cronjob || '..' == $cronjob) {
                 continue;
             }
-            $cronjob_array = json_decode(rex_file::get(rex_path::addon('auto_delete').'cronjob/'.$cronjob), 1);
+            $cronjob_array = json_decode(rex_file::get(rex_path::addon('auto_delete') . 'cronjob/' . $cronjob), 1);
 
             rex_sql::factory()->setDebug(0)->setTable('rex_cronjob')
            ->setTable(rex::getTable('cronjob'))

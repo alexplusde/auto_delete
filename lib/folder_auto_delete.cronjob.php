@@ -31,7 +31,7 @@ class rex_cronjob_folder_auto_delete extends rex_cronjob
             $days = (int) $this->getParam('days');
             $purgeLog = self::purgeDir($days, $dir);
             if (0 != $purgeLog) {
-                $this->setMessage('Files deleted: '.$purgeLog);
+                $this->setMessage('Files deleted: ' . $purgeLog);
                 return true;
             }
             $this->setMessage('No files found to delete');
@@ -53,35 +53,34 @@ class rex_cronjob_folder_auto_delete extends rex_cronjob
         foreach ($iterator = new RecursiveIteratorIterator(
             new RecursiveDirectoryIterator(
                 rex_path::data(),
-                RecursiveDirectoryIterator::SKIP_DOTS
+                RecursiveDirectoryIterator::SKIP_DOTS,
             ),
-            RecursiveIteratorIterator::SELF_FIRST
+            RecursiveIteratorIterator::SELF_FIRST,
         ) as $item) {
             // Note SELF_FIRST, so array keys are in place before values are pushed.
 
             $subPath = $iterator->getSubPathName();
             if ($item->isDir()) {
                 // Create a new array key of the current directory name.
-                $folders[rex_path::data().$subPath] = rex_path::data().$subPath;
+                $folders[rex_path::data() . $subPath] = rex_path::data() . $subPath;
             }
         }
 
         foreach ($iterator = new RecursiveIteratorIterator(
             new RecursiveDirectoryIterator(
                 rex_path::cache(),
-                RecursiveDirectoryIterator::SKIP_DOTS
+                RecursiveDirectoryIterator::SKIP_DOTS,
             ),
-            RecursiveIteratorIterator::SELF_FIRST
+            RecursiveIteratorIterator::SELF_FIRST,
         ) as $item) {
             // Note SELF_FIRST, so array keys are in place before values are pushed.
 
             $subPath = $iterator->getSubPathName();
             if ($item->isDir()) {
                 // Create a new array key of the current directory name.
-                $folders[rex_path::cache().$subPath] = rex_path::cache().$subPath;
+                $folders[rex_path::cache() . $subPath] = rex_path::cache() . $subPath;
             }
         }
-
 
         return [
             [
@@ -96,15 +95,15 @@ class rex_cronjob_folder_auto_delete extends rex_cronjob
                     180 => '180 ' . rex_i18n::msg('auto_delete_folder_days'),
                 ],
                 'default' => 7,
-            ],[
+            ], [
                 'label' => rex_i18n::msg('auto_delete_folder_label'),
                 'name' => 'dir',
                 'type' => 'select',
-                'attributes'=>["class" => 'form-control selectpicker'],
+                'attributes' => ['class' => 'form-control selectpicker'],
                 'options' => $folders,
                 'default' => 7,
                 'notice' => rex_path::data(),
-            ]
+            ],
         ];
     }
 }
