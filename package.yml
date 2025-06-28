@@ -1,15 +1,15 @@
 package: auto_delete 
-version: '1.0.2'
+version: '1.0.3'
 author: 'Alexander Walther' 
 supportpage: https://github.com/alexplusde/auto_delete 
 
 
 requires:                       
     php:
-        version: '>7.3,<9'
-    redaxo: ^5.13
+        version: '>=8.4,<9'
+    redaxo: '^5.18.3'
     packages:
-        yform: "^4"
+        yform: ">=4,<6"
         cronjob: "^2.8"
 
 page:
