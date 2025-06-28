@@ -6,7 +6,7 @@ supportpage: https://github.com/alexplusde/auto_delete
 
 requires:                       
     php:
-        version: '>=8.4,<9'
+        version: '>=8.3,<9'
     redaxo: '^5.18.3'
     packages:
         yform: ">=4,<6"
