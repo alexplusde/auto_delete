@@ -4,7 +4,8 @@ class rex_cronjob_table_auto_delete extends rex_cronjob
 {
     public function execute()
     {
-        rex_sql::factory()->query('DELETE FROM ' . $this->getParam('rex_table') . ' WHERE ' . (string) $this->getParam('field') . ' < MONTH(NOW() - INTERVAL ' . (int) $this->getParam('interval') . ' MONTH)');
+        $sql = rex_sql::factory();
+        $sql->setQuery('DELETE FROM ' . $this->getParam('rex_table') . ' WHERE ' . (string) $this->getParam('field') . ' < DATE_SUB(NOW(), INTERVAL ' . (int) $this->getParam('interval') . ' MONTH)');
 
         $this->setMessage('Datensätze in der Tabelle ' . $this->getParam('rex_table') . ' gelöscht, die älter als ' . $this->getParam('interval') . ' Monate waren.');
         return true;
