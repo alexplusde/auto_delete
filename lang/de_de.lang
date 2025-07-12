@@ -11,6 +11,8 @@ yform_values_datestamp_auto_delete.description = 🧩 Auto Delete: Ein <code>dat
 auto_delete.yform = Lösche YForm-Datensätze anhand des Felds datestamp_auto_delete
 auto_delete.yform_cronjob_message = Datensätze wurden erfolgreich gelöscht.
 
+auto_delete.auto_install = Cronjob wurde automatisch installiert.
+
 auto_delete.folder = Lösche Dateien in einem gewählten Verzeichnis
 auto_delete.folder_days_label = Lösche Dateien nach einer bestimmten Zeit
 auto_delete.folder_days = Tage
