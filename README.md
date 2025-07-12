@@ -17,9 +17,9 @@ Ein Feld für YForm, das wie `datestamp` beim Erstellen oder Updaten eines Daten
 
 Das passende Gegenstück zu `datestamp_auto_delete` für YForm. Durchsucht alle in YForm verwalteten Tabellen nach dem Feld `datestamp_auto_delete` und löscht den Datensatz auf Basis von YOrm unter Berücksichtigung der jeweiligen Extension Points.
 
-### Cronjob `folder_auto_delete` 
+### Cronjob `folder_auto_delete`
 
-Durchsucht ein angegebenes Verzeichnis nach Daten, die älterer sind als ein gewünschter Zeitpunkt und löscht diese. Vergleichbar mit dem von REDAXO mitgeliefertem Cronjob für PHPMailer-Logs oder Datenbank-Sicherungen, jedoch für ein frei wählbares Verzeichnis. 
+Durchsucht ein angegebenes Verzeichnis nach Daten, die älter sind als ein gewünschter Zeitpunkt und löscht diese. Vergleichbar mit dem von REDAXO mitgeliefertem Cronjob für PHPMailer-Logs oder Datenbank-Sicherungen, jedoch für ein frei wählbares Verzeichnis.
 
 Z.B. Ordner, in die der Nutzer über YForm im Frontend Daten hochlädt, denkbar bei Bewerberformularen.
 
