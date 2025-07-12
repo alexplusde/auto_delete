@@ -2,9 +2,9 @@
 
 namespace Alexplusde\AutoDelete;
 
-use rex_sql;
 use rex_file;
 use rex_path;
+use rex_sql;
 
 class AutoDelete
 {

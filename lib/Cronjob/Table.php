@@ -2,6 +2,8 @@
 
 namespace Alexplusde\AutoDelete\Cronjob;
 
+use function sprintf;
+
 class Table extends rex_cronjob
 {
     public function execute()

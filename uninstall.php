@@ -4,4 +4,4 @@
 
 // Cronjobs deaktivieren
 if (rex_addon::get('cronjob')->isAvailable()) {
-}   
+}

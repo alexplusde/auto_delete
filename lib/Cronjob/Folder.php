@@ -2,6 +2,8 @@
 
 namespace Alexplusde\AutoDelete\Cronjob;
 
+use function count;
+
 class Folder extends rex_cronjob
 {
     private function purgeDir(int $days = 31, string $dir = ''): int
