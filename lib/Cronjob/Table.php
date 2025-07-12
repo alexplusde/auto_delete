@@ -52,7 +52,7 @@ class Table extends rex_cronjob
 
     public function getTypeName()
     {
-        return rex_i18n::msg('auto_delete_table');
+        return rex_i18n::msg('auto_delete.table');
     }
 
     public function getParamFields()
@@ -60,25 +60,25 @@ class Table extends rex_cronjob
         // Eingabefelder des Cronjobs definieren
         $fields = [
             [
-                'label' => rex_i18n::msg('auto_delete_table_cronjob_rex_table_label'),
+                'label' => rex_i18n::msg('auto_delete.table_cronjob_rex_table_label'),
                 'name' => 'rex_table',
                 'type' => 'select',
                 'options' => array_column(rex_sql::factory()->getArray('SELECT TABLE_NAME as id, TABLE_NAME as name FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME LIKE "rex_%"'), 'id', 'name'),
-                'notice' => rex_i18n::msg('auto_delete_table_cronjob_rex_table_notice'),
+                'notice' => rex_i18n::msg('auto_delete.table_cronjob_rex_table_notice'),
             ],
             [
-                'label' => rex_i18n::msg('auto_delete_table_cronjob_field_label'),
+                'label' => rex_i18n::msg('auto_delete.table_cronjob_field_label'),
                 'name' => 'field',
                 'type' => 'text',
                 'default' => 'createdate',
-                'notice' => rex_i18n::msg('auto_delete_table_cronjob_field_notice'),
+                'notice' => rex_i18n::msg('auto_delete.table_cronjob_field_notice'),
             ],
             [
-                'label' => rex_i18n::msg('auto_delete_table_cronjob_interval_label'),
+                'label' => rex_i18n::msg('auto_delete.table_cronjob_interval_label'),
                 'name' => 'interval',
                 'default' => '6',
                 'type' => 'text',
-                'notice' => rex_i18n::msg('auto_delete_table_cronjob_interval_notice'),
+                'notice' => rex_i18n::msg('auto_delete.table_cronjob_interval_notice'),
             ],
         ];
 

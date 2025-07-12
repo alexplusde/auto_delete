@@ -47,7 +47,7 @@ class Folder extends rex_cronjob
 
     public function getTypeName()
     {
-        return rex_i18n::msg('auto_delete_folder');
+        return rex_i18n::msg('auto_delete.folder');
     }
 
     public function getParamFields()
@@ -88,19 +88,19 @@ class Folder extends rex_cronjob
 
         return [
             [
-                'label' => rex_i18n::msg('auto_delete_folder_days_label'),
+                'label' => rex_i18n::msg('auto_delete.folder_days_label'),
                 'name' => 'days',
                 'type' => 'select',
                 'options' => [
-                    7 => '7 ' . rex_i18n::msg('auto_delete_folder_days'),
-                    14 => '14 ' . rex_i18n::msg('auto_delete_folder_days'),
-                    30 => '30 ' . rex_i18n::msg('auto_delete_folder_days'),
-                    90 => '90 ' . rex_i18n::msg('auto_delete_folder_days'),
-                    180 => '180 ' . rex_i18n::msg('auto_delete_folder_days'),
+                    7 => '7 ' . rex_i18n::msg('auto_delete.folder_days'),
+                    14 => '14 ' . rex_i18n::msg('auto_delete.folder_days'),
+                    30 => '30 ' . rex_i18n::msg('auto_delete.folder_days'),
+                    90 => '90 ' . rex_i18n::msg('auto_delete.folder_days'),
+                    180 => '180 ' . rex_i18n::msg('auto_delete.folder_days'),
                 ],
                 'default' => 7,
             ], [
-                'label' => rex_i18n::msg('auto_delete_folder_label'),
+                'label' => rex_i18n::msg('auto_delete.folder_label'),
                 'name' => 'dir',
                 'type' => 'select',
                 'attributes' => ['class' => 'form-control selectpicker'],
