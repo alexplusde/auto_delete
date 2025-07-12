@@ -2,9 +2,9 @@
 
 namespace Alexplusde\AutoDelete;
 
+use rex;
 use rex_addon;
 use rex_cronjob_manager;
-use rex;
 
 if (rex_addon::get('cronjob')->isAvailable() && !rex::isSafeMode()) {
     rex_cronjob_manager::registerType('auto_delete.table');

@@ -2,8 +2,8 @@
 
 namespace Alexplusde\AutoDelete;
 
-use rex_yform_value_datestamp;
 use rex_i18n;
+use rex_yform_value_datestamp;
 use rex_yform_value_datetime;
 
 class rex_yform_value_datestamp_auto_delete extends rex_yform_value_datestamp
