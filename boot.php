@@ -1,9 +1,15 @@
 <?php
 
+namespace Alexplusde\AutoDelete;
+
+use rex_addon;
+use rex_cronjob_manager;
+use rex;
+
 if (rex_addon::get('cronjob')->isAvailable() && !rex::isSafeMode()) {
-    rex_cronjob_manager::registerType('rex_cronjob_table_auto_delete');
-    rex_cronjob_manager::registerType('rex_cronjob_yform_auto_delete');
-    rex_cronjob_manager::registerType('rex_cronjob_folder_auto_delete');
+    rex_cronjob_manager::registerType('auto_delete.table');
+    rex_cronjob_manager::registerType('auto_delete.yform_table');
+    rex_cronjob_manager::registerType('auto_delete.folder');
 }
 
 // auto_delete::writeCronjob();

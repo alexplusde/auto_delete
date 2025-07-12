@@ -1,6 +1,8 @@
 <?php
 
-class rex_cronjob_folder_auto_delete extends rex_cronjob
+namespace Alexplusde\AutoDelete\Cronjob;
+
+class Folder extends rex_cronjob
 {
     private function purgeDir(int $days = 31, string $dir = ''): int
     {

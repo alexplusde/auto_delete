@@ -1,6 +1,8 @@
 <?php
 
-class rex_cronjob_table_auto_delete extends rex_cronjob
+namespace Alexplusde\AutoDelete\Cronjob;
+
+class Table extends rex_cronjob
 {
     public function execute()
     {

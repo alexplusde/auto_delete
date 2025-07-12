@@ -1,5 +1,5 @@
 package: auto_delete 
-version: '1.0.5-dev-2025-07-12'
+version: '2.0.0-dev-2025-07-12'
 author: 'Alexander Walther' 
 supportpage: https://github.com/alexplusde/auto_delete 
 
@@ -11,9 +11,3 @@ requires:
     packages:
         yform: ">=4,<6"
         cronjob: "^2.8"
-
-page:
-    title: translate:auto_delete_title
-    prio: 100
-    icon: rex-icon fa-gear
-    hidden: true
