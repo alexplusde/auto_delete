@@ -2,51 +2,49 @@
 
 class rex_cronjob_table_auto_delete extends rex_cronjob
 {
-    
     public function execute()
     {
         $sql = rex_sql::factory();
-        
+
         // Parameter aus den Einstellungen holen
         $table = $this->getParam('rex_table');
         $field = $this->getParam('field');
         $interval = (int) $this->getParam('interval');
-        
+
         // Prüfen, ob die Tabelle existiert
         $checkTableQuery = 'SHOW TABLES LIKE ' . $sql->escape($table);
         $sql->setQuery($checkTableQuery);
-        
-        if ($sql->getRows() === 0) {
+
+        if (0 === $sql->getRows()) {
             $this->setMessage('Fehler: Tabelle "' . $table . '" existiert nicht.');
             return false;
         }
-        
+
         // Prüfen, ob das Feld in der Tabelle existiert
-        $checkFieldQuery = sprintf('SHOW COLUMNS FROM `%s` LIKE %s', 
+        $checkFieldQuery = sprintf('SHOW COLUMNS FROM `%s` LIKE %s',
             $table, // Tabellenname als Identifier (mit Backticks)
-            $sql->escape($field) // Feldname als String (escaped)
+            $sql->escape($field), // Feldname als String (escaped)
         );
         $sql->setQuery($checkFieldQuery);
-        
-        if ($sql->getRows() === 0) {
+
+        if (0 === $sql->getRows()) {
             $this->setMessage('Fehler: Feld "' . $field . '" existiert nicht in Tabelle "' . $table . '".');
             return false;
         }
-        
+
         // Sichere DELETE-Query ausführen
         $deleteQuery = sprintf(
             'DELETE FROM `%s` WHERE `%s` < DATE_SUB(NOW(), INTERVAL %d MONTH)',
             $table, // Tabellenname als Identifier
-            $field, // Feldname als Identifier  
-            $interval // Integer ist bereits sicher
+            $field, // Feldname als Identifier
+            $interval, // Integer ist bereits sicher
         );
-        
+
         $sql->setQuery($deleteQuery);
-        
+
         $this->setMessage('Datensätze in der Tabelle ' . $table . ' gelöscht, die älter als ' . $interval . ' Monate waren.');
         return true;
     }
-
 
     public function getTypeName()
     {
