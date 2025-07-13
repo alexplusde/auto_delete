@@ -12,7 +12,7 @@ if (null !== $addon && rex_addon::get('cronjob')->isAvailable()) {
     }
 }
 
-// Upgrade Cronjobs von v1 zu v2 
+// Upgrade Cronjobs von v1 zu v2
 
 // YForm-Tabellen
 rex_sql::factory()
