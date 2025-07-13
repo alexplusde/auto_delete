@@ -1,25 +1,27 @@
-auto_delete_title: Automatisches Löschen
+auto_delete.title: Automatisches Löschen
 
 
 # YForm Tablelen-Übersetzung
 
 # YForm Feld
-yform_values_datestamp_auto_delete_offset = Löschen nach...
-yform_values_datestamp_auto_delete_offset_notice =in PHP-Format <code>strtotime()</code>, z.B. <code>+ 6 months</code> oder <code>next Monday</code> oder <code>31 December 2025</code>. Siehe <a href="https://www.php.net/manual/de/function.strtotime.php" target="_blank">PHP-Docs</a>
-yform_values_datestamp_auto_delete_description = 🧩 Auto Delete: Ein <code>datestamp</code>-Feld, mit einem Lösch-Datum in der Zukunft.
+yform_values_datestamp_auto_delete.offset = Löschen nach...
+yform_values_datestamp_auto_delete.offset_notice =in PHP-Format <code>strtotime()</code>, z.B. <code>+ 6 months</code> oder <code>next Monday</code> oder <code>31 December 2025</code>. Siehe <a href="https://www.php.net/manual/de/function.strtotime.php" target="_blank">PHP-Docs</a>
+yform_values_datestamp_auto_delete.description = 🧩 Auto Delete: Ein <code>datestamp</code>-Feld, mit einem Lösch-Datum in der Zukunft.
 
-auto_delete_yform = Lösche YForm-Datensätze anhand des Felds datestamp_auto_delete
-auto_delete_yform_cronjob_message = Datensätze wurden erfolgreich gelöscht.
+auto_delete.yform = Lösche YForm-Datensätze anhand des Felds datestamp_auto_delete
+auto_delete.yform_cronjob_message = Datensätze wurden erfolgreich gelöscht.
 
-auto_delete_folder = Lösche Dateien in einem gewählten Verzeichnis
-auto_delete_folder_days_label = Lösche Dateien nach einer bestimmten Zeit
-auto_delete_folder_days = Tage
-auto_delete_folder_label = Absoluter Ordner-Pfad
+auto_delete.auto_install = Cronjob wurde automatisch installiert.
 
-auto_delete_table = Lösche Datensätze in einer gewählten Datenbank-Tabelle nach einer bestimmten Zeit
-auto_delete_table_cronjob_rex_table_label = Name der Tabelle
-auto_delete_table_cronjob_rex_table_notice = z.B. <code>rex_article_history</code>
-auto_delete_table_cronjob_field_label = Feld
-auto_delete_table_cronjob_field_notice = z.B. <code>createdate</code>
-auto_delete_table_cronjob_interval_label = Offset
-#auto_delete_table_cronjob_interval_notice = Nach wie vielen Monaten, z.B. <code>6</code> für "6 Monate später".
+auto_delete.folder = Lösche Dateien in einem gewählten Verzeichnis
+auto_delete.folder_days_label = Lösche Dateien nach einer bestimmten Zeit
+auto_delete.folder_days = Tage
+auto_delete.folder_label = Absoluter Ordner-Pfad
+
+auto_delete.table = Lösche Datensätze in einer gewählten Datenbank-Tabelle nach einer bestimmten Zeit
+auto_delete.table_cronjob_rex_table_label = Name der Tabelle
+auto_delete.table_cronjob_rex_table_notice = z.B. <code>rex_article_history</code>
+auto_delete.table_cronjob_field_label = Feld
+auto_delete.table_cronjob_field_notice = z.B. <code>createdate</code>
+auto_delete.table_cronjob_interval_label = Offset
+#auto_delete.table_cronjob_interval_notice = Nach wie vielen Monaten, z.B. <code>6</code> für "6 Monate später".
