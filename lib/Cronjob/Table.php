@@ -3,8 +3,10 @@
 namespace Alexplusde\AutoDelete\Cronjob;
 
 use rex_cronjob;
-use rex_sql;
 use rex_i18n;
+use rex_sql;
+
+use function sprintf;
 
 class Table extends rex_cronjob
 {
