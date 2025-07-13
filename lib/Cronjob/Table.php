@@ -6,7 +6,7 @@ use rex_cronjob;
 use rex_i18n;
 use rex_sql;
 
-use function sprintf;
+use function is_string;
 
 class Table extends rex_cronjob
 {
@@ -19,12 +19,12 @@ class Table extends rex_cronjob
         $fieldParam = $this->getParam('field');
         $intervalParam = $this->getParam('interval');
 
-        if (!is_string($tableParam) || $tableParam === '') {
+        if (!is_string($tableParam) || '' === $tableParam) {
             $this->setMessage('Fehler: Ungültiger Tabellenname.');
             return false;
         }
 
-        if (!is_string($fieldParam) || $fieldParam === '') {
+        if (!is_string($fieldParam) || '' === $fieldParam) {
             $this->setMessage('Fehler: Ungültiger Feldname.');
             return false;
         }

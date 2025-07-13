@@ -12,6 +12,7 @@ use rex_path;
 
 use function count;
 use function is_array;
+use function is_string;
 
 class Folder extends rex_cronjob
 {
@@ -44,10 +45,10 @@ class Folder extends rex_cronjob
     private function isFileOlderThan(string $file, int $days): bool
     {
         $fileTime = filemtime($file);
-        if ($fileTime === false) {
+        if (false === $fileTime) {
             return false;
         }
-        
+
         $fileAge = time() - $fileTime;
         return $fileAge > (60 * 60 * 24 * $days);
     }
@@ -66,24 +67,24 @@ class Folder extends rex_cronjob
     {
         $dirParam = $this->getParam('dir');
         $daysParam = $this->getParam('days');
-        
-        if (!is_string($dirParam) || $dirParam === '') {
+
+        if (!is_string($dirParam) || '' === $dirParam) {
             $this->setMessage('Invalid directory parameter');
             return false;
         }
-        
+
         if (!is_dir($dirParam)) {
             $this->setMessage('Unable to find folder');
             return false;
         }
-        
+
         $days = is_numeric($daysParam) ? (int) $daysParam : 7;
         if ($days <= 0) {
             $days = 7; // Default fallback
         }
-        
+
         $purgeLog = $this->purgeDir($days, $dirParam);
-        if ($purgeLog !== 0) {
+        if (0 !== $purgeLog) {
             $this->setMessage('Files deleted: ' . $purgeLog);
             return true;
         }

@@ -4,11 +4,13 @@ namespace Alexplusde\AutoDelete;
 
 use rex;
 use rex_file;
-use rex_formatter;
 use rex_path;
 use rex_sql;
 use rex_type;
 use rex_yform_manager_query;
+
+use function is_array;
+use function is_string;
 
 class AutoDelete
 {
@@ -50,17 +52,17 @@ class AutoDelete
             if ('.' === $cronjob || '..' === $cronjob) {
                 continue;
             }
-            
+
             $cronjobContent = rex_file::get($cronjobsDir . '/' . $cronjob);
-            if (!is_string($cronjobContent) || $cronjobContent === '') {
+            if (!is_string($cronjobContent) || '' === $cronjobContent) {
                 continue;
             }
-            
+
             $cronjob_array = json_decode($cronjobContent, true);
             if (!is_array($cronjob_array)) {
                 continue;
             }
-                        
+
             rex_sql::factory()->setDebug(false)->setTable(rex::getTable('cronjob'))
                 ->setValue('name', rex_type::string($cronjob_array['name']))
                 ->setValue('description', rex_type::string($cronjob_array['description']))
