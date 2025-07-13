@@ -2,6 +2,8 @@
 
 namespace Alexplusde\AutoDelete\Cronjob;
 
+use Alexplusde\AutoDelete\AutoDelete;
+
 class YFormTable extends rex_cronjob
 {
     public function execute()
