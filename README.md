@@ -1,9 +1,13 @@
 
 # Auto-Delete-Addon für REDAXO 5.x
 
-![image](https://user-images.githubusercontent.com/3855487/152675689-328899a4-90d6-41da-bef4-78d1c8e7f8c5.png)
+Löscht alte Logs, Dateien und Datensätze (mit und ohne YForm) via Cronjob.
 
-Löscht alte Logs und Datensätze via Cronjob.
+Wird zur Unterstützung von DSGVO und GDPR-Kompatiblität verwendet in:
+
+* <https://github.com/friendsofredaxo/warehouse/>
+* <https://github.com/alexplusde/events>
+* <https://github.com/alexplusde/stellenangebote/>
 
 ## Features
 
@@ -13,11 +17,11 @@ Ein Feld für YForm, das wie `datestamp` beim Erstellen oder Updaten eines Daten
 
 [Liste der möglichen Offset-Parameter in den PHP-Docs](https://www.php.net/manual/de/function.strtotime.php)
 
-### Cronjob `yform_auto_delete`
+### Cronjob `YForm`
 
 Das passende Gegenstück zu `datestamp_auto_delete` für YForm. Durchsucht alle in YForm verwalteten Tabellen nach dem Feld `datestamp_auto_delete` und löscht den Datensatz auf Basis von YOrm unter Berücksichtigung der jeweiligen Extension Points.
 
-### Cronjob `folder_auto_delete`
+### Cronjob `Folder`
 
 Durchsucht ein angegebenes Verzeichnis nach Daten, die älter sind als ein gewünschter Zeitpunkt und löscht diese. Vergleichbar mit dem von REDAXO mitgeliefertem Cronjob für PHPMailer-Logs oder Datenbank-Sicherungen, jedoch für ein frei wählbares Verzeichnis.
 
@@ -25,7 +29,7 @@ Z.B. Ordner, in die der Nutzer über YForm im Frontend Daten hochlädt, denkbar 
 
 > **Vorsicht:** Falsch angegebene Pfade können zu ungewolltem Datenverlust führen. Bitte die Pfadangaben vorher überprüfen.
 
-### Cronjob `table_auto_delete`
+### Cronjob `Table`
 
 > **Hinweis:** nur empfohlen für Tabellen, die **nicht** in YForm verwaltet werden.
 
