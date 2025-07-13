@@ -18,10 +18,10 @@ class rex_yform_value_datestamp_auto_delete extends rex_yform_value_datestamp
         parent::preValidateAction();
         $currentValue = $this->getValue();
         $offset = $this->getElement('offset');
-        
-        if ($currentValue !== false && $currentValue !== null) {
+
+        if (false !== $currentValue && null !== $currentValue) {
             $timestamp = strtotime($currentValue . ' ' . $offset);
-            if ($timestamp !== false) {
+            if (false !== $timestamp) {
                 $value = date('Y-m-d h:i:s', $timestamp);
                 $this->setValue($value);
             }

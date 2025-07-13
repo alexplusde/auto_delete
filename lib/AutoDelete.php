@@ -30,7 +30,7 @@ class AutoDelete
 
         foreach ($cronjobs as $cronjob) {
             $content = json_encode($cronjob);
-            if ($content !== false) {
+            if (false !== $content) {
                 rex_file::put(rex_path::addon('auto_delete', 'cronjob/' . $cronjob['type'] . '.json'), $content);
             }
         }
