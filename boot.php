@@ -7,9 +7,9 @@ use rex_addon;
 use rex_cronjob_manager;
 
 if (rex_addon::get('cronjob')->isAvailable() && !rex::isSafeMode()) {
-    rex_cronjob_manager::registerType('auto_delete.table');
-    rex_cronjob_manager::registerType('auto_delete.yform_table');
-    rex_cronjob_manager::registerType('auto_delete.folder');
+    rex_cronjob_manager::registerType(Table::class);
+    rex_cronjob_manager::registerType(YFormTable::class);
+    rex_cronjob_manager::registerType(Folder::class);
 }
 
 // auto_delete::writeCronjob();
