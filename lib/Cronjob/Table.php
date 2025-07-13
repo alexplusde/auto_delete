@@ -57,8 +57,6 @@ class Table extends rex_cronjob
 
     public function getParamFields()
     {
-
-        
         // Eingabefelder des Cronjobs definieren
         $fields = [
             [
@@ -67,14 +65,14 @@ class Table extends rex_cronjob
                 'type' => 'select',
                 'options' => array_column(
                     rex_sql::factory()->getArray(
-                        'SELECT TABLE_NAME as id, TABLE_NAME as name 
-                        FROM INFORMATION_SCHEMA.TABLES 
-                        WHERE TABLE_NAME LIKE "rex_%" 
-                        AND TABLE_TYPE = "BASE TABLE" 
-                        AND TABLE_SCHEMA = DATABASE()'
+                        'SELECT TABLE_NAME as id, TABLE_NAME as name
+                        FROM INFORMATION_SCHEMA.TABLES
+                        WHERE TABLE_NAME LIKE "rex_%"
+                        AND TABLE_TYPE = "BASE TABLE"
+                        AND TABLE_SCHEMA = DATABASE()',
                     ),
                     'id',
-                    'name'
+                    'name',
                 ),
                 'notice' => rex_i18n::msg('auto_delete.table_cronjob_rex_table_notice'),
             ],
