@@ -11,3 +11,26 @@ if (null !== $addon && rex_addon::get('cronjob')->isAvailable()) {
         $addon->setProperty('successmsg', '<br><strong>' . rex_i18n::msg('auto_delete.auto_install') . '</strong>');
     }
 }
+
+// Upgrade Cronjobs von v1 zu v2 
+
+// YForm-Tabellen
+rex_sql::factory()
+    ->setTable(rex::getTable('cronjob'))
+    ->setWhere(['type' => 'rex_cronjob_yform_auto_delete'])
+    ->setValue('type', 'Alexplusde\AutoDelete\Cronjob\YFormTable')
+    ->update();
+
+// SQL-Tabellen
+rex_sql::factory()
+    ->setTable(rex::getTable('cronjob'))
+    ->setWhere(['type' => 'rex_cronjob_table_auto_delete'])
+    ->setValue('type', 'Alexplusde\AutoDelete\Cronjob\Table')
+    ->update();
+
+// Folder
+rex_sql::factory()
+    ->setTable(rex::getTable('cronjob'))
+    ->setWhere(['type' => 'rex_cronjob_folder_auto_delete'])
+    ->setValue('type', 'Alexplusde\AutoDelete\Cronjob\Folder')
+    ->update();
