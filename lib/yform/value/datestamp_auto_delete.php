@@ -16,11 +16,21 @@ class rex_yform_value_datestamp_auto_delete extends rex_yform_value_datestamp
     public function preValidateAction(): void
     {
         parent::preValidateAction();
-        $value = date('Y-m-d h:i:s', strtotime($this->getValue() . ' ' . $this->getElement('offset')));
-
-        $this->setValue($value);
+        $currentValue = $this->getValue();
+        $offset = $this->getElement('offset');
+        
+        if ($currentValue !== false && $currentValue !== null) {
+            $timestamp = strtotime($currentValue . ' ' . $offset);
+            if ($timestamp !== false) {
+                $value = date('Y-m-d h:i:s', $timestamp);
+                $this->setValue($value);
+            }
+        }
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function getDefinitions(): array
     {
         return [

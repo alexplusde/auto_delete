@@ -18,31 +18,51 @@ class Folder extends rex_cronjob
     {
         $log = 0;
         $files = glob($dir . '/*');
-        if ($files) {
-            foreach ($files as $file) {
-                if (is_dir($file)) {
-                    $log += self::purgeDir($days, $file);
-                } elseif ((time() - filemtime($file)) > (60 * 60 * 24 * $days)) {
-                    if (rex_file::delete($file)) {
-                        ++$log;
-                    }
-                }
-            }
-            if ('' != $dir && $dir != rex_mailer::logFolder() && is_dir($dir) && 0 === count(glob("$dir/*"))) {
-                if (true == rmdir($dir)) {
+        
+        if (!is_array($files)) {
+            return $log;
+        }
+        
+        foreach ($files as $file) {
+            if (is_dir($file)) {
+                $log += $this->purgeDir($days, $file);
+            } elseif ($this->isFileOlderThan($file, $days)) {
+                if (rex_file::delete($file)) {
+                    ++$log;
                 }
             }
         }
+        
+        if ($this->shouldRemoveEmptyDir($dir)) {
+            rmdir($dir);
+        }
+        
         return $log;
+    }
+    
+    private function isFileOlderThan(string $file, int $days): bool
+    {
+        $fileAge = time() - filemtime($file);
+        return $fileAge > (60 * 60 * 24 * $days);
+    }
+    
+    private function shouldRemoveEmptyDir(string $dir): bool
+    {
+        if ($dir === '' || $dir === rex_mailer::logFolder() || !is_dir($dir)) {
+            return false;
+        }
+        
+        $globResult = glob("$dir/*");
+        return is_array($globResult) && count($globResult) === 0;
     }
 
     public function execute()
     {
         $dir = $this->getParam('dir');
-        if ('' != $dir && is_dir($dir)) {
+        if ($dir !== '' && is_dir($dir)) {
             $days = (int) $this->getParam('days');
-            $purgeLog = self::purgeDir($days, $dir);
-            if (0 != $purgeLog) {
+            $purgeLog = $this->purgeDir($days, $dir);
+            if ($purgeLog !== 0) {
                 $this->setMessage('Files deleted: ' . $purgeLog);
                 return true;
             }
@@ -72,7 +92,7 @@ class Folder extends rex_cronjob
             // Note SELF_FIRST, so array keys are in place before values are pushed.
 
             if ($item instanceof RecursiveDirectoryIterator) {
-                $subPath = $item->getSubPathName();
+                $subPath = $item->getSubPathname();
                 if ($item->isDir()) {
                     // Create a new array key of the current directory name.
                     $folders[rex_path::data() . $subPath] = rex_path::data() . $subPath;
@@ -90,7 +110,7 @@ class Folder extends rex_cronjob
             // Note SELF_FIRST, so array keys are in place before values are pushed.
 
             if ($item instanceof RecursiveDirectoryIterator) {
-                $subPath = $item->getSubPathName();
+                $subPath = $item->getSubPathname();
                 if ($item->isDir()) {
                     // Create a new array key of the current directory name.
                     $folders[rex_path::cache() . $subPath] = rex_path::cache() . $subPath;

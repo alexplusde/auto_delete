@@ -30,9 +30,9 @@ class Table extends rex_cronjob
 
         // Prüfen, ob das Feld in der Tabelle existiert
         $checkFieldQuery = sprintf(
-            'SHOW COLUMNS FROM `%s` LIKE %s',
-            $table, // Tabellenname als Identifier (mit Backticks)
-            $sql->escape($field), // Feldname als String (escaped)
+            'SHOW COLUMNS FROM %s LIKE %s',
+            $sql->escapeIdentifier($table),
+            $sql->escape($field)
         );
         $sql->setQuery($checkFieldQuery);
 
@@ -43,10 +43,10 @@ class Table extends rex_cronjob
 
         // Sichere DELETE-Query ausführen
         $deleteQuery = sprintf(
-            'DELETE FROM `%s` WHERE `%s` < DATE_SUB(NOW(), INTERVAL %d MONTH)',
-            $table, // Tabellenname als Identifier
-            $field, // Feldname als Identifier
-            $interval, // Integer ist bereits sicher
+            'DELETE FROM %s WHERE %s < DATE_SUB(NOW(), INTERVAL %d MONTH)',
+            $sql->escapeIdentifier($table),
+            $sql->escapeIdentifier($field),
+            $interval
         );
 
         $sql->setQuery($deleteQuery);

@@ -8,10 +8,11 @@ use rex_i18n;
 
 class YFormTable extends rex_cronjob
 {
-    public function execute()
+    public function execute(): bool
     {
         AutoDelete::YForm();
-        return rex_i18n::msg('auto_delete.yform_cronjob_message');
+        $this->setMessage(rex_i18n::msg('auto_delete.yform_cronjob_message'));
+        return true;
     }
 
     public function getTypeName()
@@ -19,5 +20,8 @@ class YFormTable extends rex_cronjob
         return rex_i18n::msg('auto_delete.yform');
     }
 
-    public function getParamFields() {}
+    public function getParamFields(): array
+    {
+        return [];
+    }
 }

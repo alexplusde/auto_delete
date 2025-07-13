@@ -10,7 +10,7 @@ use rex_yform_manager_query;
 
 class AutoDelete
 {
-    public static function YForm()
+    public static function YForm(): void
     {
         $rex_sql = rex_sql::factory();
 
@@ -21,26 +21,31 @@ class AutoDelete
         }
     }
 
-    public static function writeCronjob()
+    public static function writeCronjob(): void
     {
-        $cronjobs = rex_sql::factory()->setDebug(0)->getArray("SELECT * FROM rex_cronjob WHERE `type` LIKE '%AutoDelete%'");
+        $cronjobs = rex_sql::factory()->setDebug(false)->getArray("SELECT * FROM rex_cronjob WHERE `type` LIKE '%AutoDelete%'");
 
         foreach ($cronjobs as $cronjob) {
-            rex_file::put(rex_path::addon('auto_delete', 'cronjob/' . $cronjob['type'] . '.json'), json_encode($cronjob));
+            $content = json_encode($cronjob);
+            if ($content !== false) {
+                rex_file::put(rex_path::addon('auto_delete', 'cronjob/' . $cronjob['type'] . '.json'), $content);
+            }
         }
     }
 
-    public static function updateCronjob()
+    public static function updateCronjob(): void
     {
         $cronjobs = scandir(rex_path::addon('auto_delete') . 'cronjob');
 
         foreach ($cronjobs as $cronjob) {
-            if ('.' == $cronjob || '..' == $cronjob) {
+            if ('.' === $cronjob || '..' === $cronjob) {
                 continue;
             }
-            $cronjob_array = json_decode(rex_file::get(rex_path::addon('auto_delete') . 'cronjob/' . $cronjob), 1);
-
-            rex_sql::factory()->setDebug(0)->setTable('rex_cronjob')
+            $cronjobContent = rex_file::get(rex_path::addon('auto_delete') . 'cronjob/' . $cronjob);
+            if ($cronjobContent !== null && $cronjobContent !== false) {
+                $cronjob_array = json_decode($cronjobContent, true);
+                if ($cronjob_array !== null) {
+                    rex_sql::factory()->setDebug(false)->setTable('rex_cronjob')
            ->setTable(rex::getTable('cronjob'))
            ->setValue('name', $cronjob_array['name'])
            ->setValue('description', $cronjob_array['description'])
@@ -56,6 +61,8 @@ class AutoDelete
            ->setValue('createuser', 'auto_delete')
            ->setValue('updateuser', 'auto_delete')
     ->insertOrUpdate();
+                }
+            }
         }
     }
 }
