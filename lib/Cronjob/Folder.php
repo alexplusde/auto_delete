@@ -2,6 +2,8 @@
 
 namespace Alexplusde\AutoDelete\Cronjob;
 
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
 use rex_cronjob;
 use rex_i18n;
 use rex_file;
