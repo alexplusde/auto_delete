@@ -3,10 +3,12 @@
 namespace Alexplusde\AutoDelete\Cronjob;
 
 use rex_cronjob;
-use rex_i18n;
 use rex_file;
+use rex_i18n;
 use rex_mailer;
 use rex_path;
+
+use function count;
 
 class Folder extends rex_cronjob
 {

@@ -19,7 +19,5 @@ class YFormTable extends rex_cronjob
         return rex_i18n::msg('auto_delete.yform');
     }
 
-    public function getParamFields()
-    {
-    }
+    public function getParamFields() {}
 }
