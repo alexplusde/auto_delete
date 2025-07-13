@@ -24,7 +24,7 @@ class AutoDelete
 
     public static function writeCronjob()
     {
-        $cronjobs = rex_sql::factory()->setDebug(0)->getArray("SELECT * FROM rex_cronjob WHERE `type` LIKE '%_auto_delete'");
+        $cronjobs = rex_sql::factory()->setDebug(0)->getArray("SELECT * FROM rex_cronjob WHERE `type` LIKE '%AutoDelete%'");
 
         foreach ($cronjobs as $cronjob) {
             rex_file::put(rex_path::addon('auto_delete', 'cronjob/' . $cronjob['type'] . '.json'), json_encode($cronjob));
