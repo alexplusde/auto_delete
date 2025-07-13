@@ -10,14 +10,33 @@ use function sprintf;
 
 class Table extends rex_cronjob
 {
-    public function execute()
+    public function execute(): bool
     {
         $sql = rex_sql::factory();
 
-        // Parameter aus den Einstellungen holen
-        $table = $this->getParam('rex_table');
-        $field = $this->getParam('field');
-        $interval = (int) $this->getParam('interval');
+        // Parameter aus den Einstellungen holen und validieren
+        $tableParam = $this->getParam('rex_table');
+        $fieldParam = $this->getParam('field');
+        $intervalParam = $this->getParam('interval');
+
+        if (!is_string($tableParam) || $tableParam === '') {
+            $this->setMessage('Fehler: Ungültiger Tabellenname.');
+            return false;
+        }
+
+        if (!is_string($fieldParam) || $fieldParam === '') {
+            $this->setMessage('Fehler: Ungültiger Feldname.');
+            return false;
+        }
+
+        $table = $tableParam;
+        $field = $fieldParam;
+        $interval = is_numeric($intervalParam) ? (int) $intervalParam : 0;
+
+        if ($interval <= 0) {
+            $this->setMessage('Fehler: Ungültiges Intervall.');
+            return false;
+        }
 
         // Prüfen, ob die Tabelle existiert
         $checkTableQuery = 'SHOW TABLES LIKE ' . $sql->escape($table);
@@ -29,12 +48,7 @@ class Table extends rex_cronjob
         }
 
         // Prüfen, ob das Feld in der Tabelle existiert
-        $checkFieldQuery = sprintf(
-            'SHOW COLUMNS FROM %s LIKE %s',
-            $sql->escapeIdentifier($table),
-            $sql->escape($field)
-        );
-        $sql->setQuery($checkFieldQuery);
+        $sql->setQuery('SHOW COLUMNS FROM ' . $sql->escapeIdentifier($table) . ' LIKE ' . $sql->escape($field));
 
         if (0 === $sql->getRows()) {
             $this->setMessage('Fehler: Feld "' . $field . '" existiert nicht in Tabelle "' . $table . '".');
@@ -42,25 +56,21 @@ class Table extends rex_cronjob
         }
 
         // Sichere DELETE-Query ausführen
-        $deleteQuery = sprintf(
-            'DELETE FROM %s WHERE %s < DATE_SUB(NOW(), INTERVAL %d MONTH)',
-            $sql->escapeIdentifier($table),
-            $sql->escapeIdentifier($field),
-            $interval
-        );
-
-        $sql->setQuery($deleteQuery);
+        $sql->setQuery('DELETE FROM ' . $sql->escapeIdentifier($table) . ' WHERE ' . $sql->escapeIdentifier($field) . ' < DATE_SUB(NOW(), INTERVAL ' . $interval . ' MONTH)');
 
         $this->setMessage('Datensätze in der Tabelle ' . $table . ' gelöscht, die älter als ' . $interval . ' Monate waren.');
         return true;
     }
 
-    public function getTypeName()
+    public function getTypeName(): string
     {
         return rex_i18n::msg('auto_delete.table');
     }
 
-    public function getParamFields()
+    /**
+     * @return list<array<string, mixed>>
+     */
+    public function getParamFields(): array
     {
         // Eingabefelder des Cronjobs definieren
         $fields = [

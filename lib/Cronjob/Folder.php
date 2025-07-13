@@ -42,7 +42,12 @@ class Folder extends rex_cronjob
     
     private function isFileOlderThan(string $file, int $days): bool
     {
-        $fileAge = time() - filemtime($file);
+        $fileTime = filemtime($file);
+        if ($fileTime === false) {
+            return false;
+        }
+        
+        $fileAge = time() - $fileTime;
         return $fileAge > (60 * 60 * 24 * $days);
     }
     
@@ -56,29 +61,44 @@ class Folder extends rex_cronjob
         return is_array($globResult) && count($globResult) === 0;
     }
 
-    public function execute()
+    public function execute(): bool
     {
-        $dir = $this->getParam('dir');
-        if ($dir !== '' && is_dir($dir)) {
-            $days = (int) $this->getParam('days');
-            $purgeLog = $this->purgeDir($days, $dir);
-            if ($purgeLog !== 0) {
-                $this->setMessage('Files deleted: ' . $purgeLog);
-                return true;
-            }
-            $this->setMessage('No files found to delete');
+        $dirParam = $this->getParam('dir');
+        $daysParam = $this->getParam('days');
+        
+        if (!is_string($dirParam) || $dirParam === '') {
+            $this->setMessage('Invalid directory parameter');
+            return false;
+        }
+        
+        if (!is_dir($dirParam)) {
+            $this->setMessage('Unable to find folder');
+            return false;
+        }
+        
+        $days = is_numeric($daysParam) ? (int) $daysParam : 7;
+        if ($days <= 0) {
+            $days = 7; // Default fallback
+        }
+        
+        $purgeLog = $this->purgeDir($days, $dirParam);
+        if ($purgeLog !== 0) {
+            $this->setMessage('Files deleted: ' . $purgeLog);
             return true;
         }
-        $this->setMessage('Unable to find folder');
-        return false;
+        $this->setMessage('No files found to delete');
+        return true;
     }
 
-    public function getTypeName()
+    public function getTypeName(): string
     {
         return rex_i18n::msg('auto_delete.folder');
     }
 
-    public function getParamFields()
+    /**
+     * @return list<array<string, mixed>>
+     */
+    public function getParamFields(): array
     {
         $folders = [];
 
