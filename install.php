@@ -7,7 +7,7 @@ if (null !== $addon && rex_addon::get('cronjob')->isAvailable()) {
     $cronjob = array_filter(rex_sql::factory()->getArray('SELECT * FROM rex_cronjob WHERE `type` = :type', ['type' => 'Alexplusde\AutoDelete\Cronjob\YFormTable']));
     if (0 === count($cronjob)) {
         $query = rex_file::get(__DIR__ . '/install/rex_cronjob_yform_auto_delete.sql');
-        if($query !== null) {
+        if (null !== $query) {
             rex_sql::factory()->setQuery($query);
             $addon->setProperty('successmsg', '<br><strong>' . rex_i18n::msg('auto_delete.auto_install') . '</strong>');
         }

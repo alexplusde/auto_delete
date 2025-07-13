@@ -32,7 +32,7 @@ class Table extends rex_cronjob
         $checkFieldQuery = sprintf(
             'SHOW COLUMNS FROM %s LIKE %s',
             $sql->escapeIdentifier($table),
-            $sql->escape($field)
+            $sql->escape($field),
         );
         $sql->setQuery($checkFieldQuery);
 
@@ -46,7 +46,7 @@ class Table extends rex_cronjob
             'DELETE FROM %s WHERE %s < DATE_SUB(NOW(), INTERVAL %d MONTH)',
             $sql->escapeIdentifier($table),
             $sql->escapeIdentifier($field),
-            $interval
+            $interval,
         );
 
         $sql->setQuery($deleteQuery);

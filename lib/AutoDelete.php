@@ -27,7 +27,7 @@ class AutoDelete
 
         foreach ($cronjobs as $cronjob) {
             $content = json_encode($cronjob);
-            if ($content !== false) {
+            if (false !== $content) {
                 rex_file::put(rex_path::addon('auto_delete', 'cronjob/' . $cronjob['type'] . '.json'), $content);
             }
         }
@@ -42,9 +42,9 @@ class AutoDelete
                 continue;
             }
             $cronjobContent = rex_file::get(rex_path::addon('auto_delete') . 'cronjob/' . $cronjob);
-            if ($cronjobContent !== null && $cronjobContent !== false) {
+            if (null !== $cronjobContent && false !== $cronjobContent) {
                 $cronjob_array = json_decode($cronjobContent, true);
-                if ($cronjob_array !== null) {
+                if (null !== $cronjob_array) {
                     rex_sql::factory()->setDebug(false)->setTable('rex_cronjob')
            ->setTable(rex::getTable('cronjob'))
            ->setValue('name', $cronjob_array['name'])

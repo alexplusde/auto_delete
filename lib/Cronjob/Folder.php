@@ -11,6 +11,7 @@ use rex_mailer;
 use rex_path;
 
 use function count;
+use function is_array;
 
 class Folder extends rex_cronjob
 {
@@ -18,11 +19,11 @@ class Folder extends rex_cronjob
     {
         $log = 0;
         $files = glob($dir . '/*');
-        
+
         if (!is_array($files)) {
             return $log;
         }
-        
+
         foreach ($files as $file) {
             if (is_dir($file)) {
                 $log += $this->purgeDir($days, $file);
@@ -32,37 +33,37 @@ class Folder extends rex_cronjob
                 }
             }
         }
-        
+
         if ($this->shouldRemoveEmptyDir($dir)) {
             rmdir($dir);
         }
-        
+
         return $log;
     }
-    
+
     private function isFileOlderThan(string $file, int $days): bool
     {
         $fileAge = time() - filemtime($file);
         return $fileAge > (60 * 60 * 24 * $days);
     }
-    
+
     private function shouldRemoveEmptyDir(string $dir): bool
     {
-        if ($dir === '' || $dir === rex_mailer::logFolder() || !is_dir($dir)) {
+        if ('' === $dir || $dir === rex_mailer::logFolder() || !is_dir($dir)) {
             return false;
         }
-        
+
         $globResult = glob("$dir/*");
-        return is_array($globResult) && count($globResult) === 0;
+        return is_array($globResult) && 0 === count($globResult);
     }
 
     public function execute()
     {
         $dir = $this->getParam('dir');
-        if ($dir !== '' && is_dir($dir)) {
+        if ('' !== $dir && is_dir($dir)) {
             $days = (int) $this->getParam('days');
             $purgeLog = $this->purgeDir($days, $dir);
-            if ($purgeLog !== 0) {
+            if (0 !== $purgeLog) {
                 $this->setMessage('Files deleted: ' . $purgeLog);
                 return true;
             }
