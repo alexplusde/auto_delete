@@ -2,7 +2,11 @@
 
 namespace Alexplusde\AutoDelete\Cronjob;
 
-use function count;
+use rex_cronjob;
+use rex_i18n;
+use rex_file;
+use rex_mailer;
+use rex_path;
 
 class Folder extends rex_cronjob
 {
@@ -13,7 +17,7 @@ class Folder extends rex_cronjob
         if ($files) {
             foreach ($files as $file) {
                 if (is_dir($file)) {
-                    $log += self::purgeMailarchive($days, $file);
+                    $log += self::purgeDir($days, $file);
                 } elseif ((time() - filemtime($file)) > (60 * 60 * 24 * $days)) {
                     if (rex_file::delete($file)) {
                         ++$log;

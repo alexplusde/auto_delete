@@ -3,6 +3,8 @@
 namespace Alexplusde\AutoDelete\Cronjob;
 
 use Alexplusde\AutoDelete\AutoDelete;
+use rex_cronjob;
+use rex_i18n;
 
 class YFormTable extends rex_cronjob
 {
@@ -17,5 +19,7 @@ class YFormTable extends rex_cronjob
         return rex_i18n::msg('auto_delete.yform');
     }
 
-    public function getParamFields() {}
+    public function getParamFields()
+    {
+    }
 }

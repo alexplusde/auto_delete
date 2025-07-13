@@ -2,7 +2,9 @@
 
 namespace Alexplusde\AutoDelete\Cronjob;
 
-use function sprintf;
+use rex_cronjob;
+use rex_sql;
+use rex_i18n;
 
 class Table extends rex_cronjob
 {
@@ -25,7 +27,8 @@ class Table extends rex_cronjob
         }
 
         // Prüfen, ob das Feld in der Tabelle existiert
-        $checkFieldQuery = sprintf('SHOW COLUMNS FROM `%s` LIKE %s',
+        $checkFieldQuery = sprintf(
+            'SHOW COLUMNS FROM `%s` LIKE %s',
             $table, // Tabellenname als Identifier (mit Backticks)
             $sql->escape($field), // Feldname als String (escaped)
         );
