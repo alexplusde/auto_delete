@@ -12,7 +12,6 @@ class AutoDelete
 {
     public static function YForm()
     {
-
         $rex_sql = rex_sql::factory();
 
         foreach (rex_sql::factory()->getArray('SELECT  * FROM `' . rex::getTable('yform_field') . '` WHERE `type_name` = "datestamp_auto_delete" ') as $field) {
