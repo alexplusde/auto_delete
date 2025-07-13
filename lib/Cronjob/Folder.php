@@ -71,10 +71,12 @@ class Folder extends rex_cronjob
         ) as $item) {
             // Note SELF_FIRST, so array keys are in place before values are pushed.
 
-            $subPath = $iterator->getSubPathName();
-            if ($item->isDir()) {
-                // Create a new array key of the current directory name.
-                $folders[rex_path::data() . $subPath] = rex_path::data() . $subPath;
+            if ($item instanceof RecursiveDirectoryIterator) {
+                $subPath = $item->getSubPathName();
+                if ($item->isDir()) {
+                    // Create a new array key of the current directory name.
+                    $folders[rex_path::data() . $subPath] = rex_path::data() . $subPath;
+                }
             }
         }
 
@@ -87,10 +89,12 @@ class Folder extends rex_cronjob
         ) as $item) {
             // Note SELF_FIRST, so array keys are in place before values are pushed.
 
-            $subPath = $iterator->getSubPathName();
-            if ($item->isDir()) {
-                // Create a new array key of the current directory name.
-                $folders[rex_path::cache() . $subPath] = rex_path::cache() . $subPath;
+            if ($item instanceof RecursiveDirectoryIterator) {
+                $subPath = $item->getSubPathName();
+                if ($item->isDir()) {
+                    // Create a new array key of the current directory name.
+                    $folders[rex_path::cache() . $subPath] = rex_path::cache() . $subPath;
+                }
             }
         }
 
