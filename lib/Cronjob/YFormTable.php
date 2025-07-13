@@ -10,7 +10,7 @@ class YFormTable extends rex_cronjob
 {
     public function execute()
     {
-        AutoDelete::yform_auto_delete();
+        AutoDelete::YForm();
         return rex_i18n::msg('auto_delete.yform_cronjob_message');
     }
 
@@ -19,5 +19,7 @@ class YFormTable extends rex_cronjob
         return rex_i18n::msg('auto_delete.yform');
     }
 
-    public function getParamFields() {}
+    public function getParamFields()
+    {
+    }
 }

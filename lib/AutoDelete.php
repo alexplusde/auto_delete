@@ -2,16 +2,23 @@
 
 namespace Alexplusde\AutoDelete;
 
+use rex;
 use rex_file;
 use rex_path;
 use rex_sql;
+use rex_yform_manager_query;
 
 class AutoDelete
 {
-    public static function yform_auto_delete()
+    public static function YForm()
     {
+
+        $rex_sql = rex_sql::factory();
+
         foreach (rex_sql::factory()->getArray('SELECT  * FROM `' . rex::getTable('yform_field') . '` WHERE `type_name` = "datestamp_auto_delete" ') as $field) {
-            rex_sql::factory()->setQuery('DELETE FROM ' . rex_sql::escape($field['table_name']) . ' WHERE ' . rex_sql::escape($field['name']) . ' < NOW()');
+            // Verwende YOrm statt rex_sql
+            $collection = rex_yform_manager_query::get($field['table_name'])->where($field['name'], 'NOW()', '<')->find();
+            $collection->delete();
         }
     }
 
