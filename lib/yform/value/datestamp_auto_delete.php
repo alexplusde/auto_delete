@@ -1,7 +1,5 @@
 <?php
 
-namespace Alexplusde\AutoDelete;
-
 use rex_i18n;
 use rex_yform_value_datestamp;
 use rex_yform_value_datetime;
