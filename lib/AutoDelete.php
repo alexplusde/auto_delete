@@ -20,7 +20,7 @@ class AutoDelete
 
         foreach ($rex_sql->getArray('SELECT  * FROM `' . rex::getTable('yform_field') . '` WHERE `type_name` = "datestamp_auto_delete" ') as $field) {
             // Verwende YOrm statt rex_sql
-            $collection = rex_yform_manager_query::get($field['table_name'])->where($field['name'], date ("Y-m-d H:i:s"), '<')->find();
+            $collection = rex_yform_manager_query::get($field['table_name'])->where($field['name'], date('Y-m-d H:i:s'), '<')->find();
             $collection->delete();
         }
     }
