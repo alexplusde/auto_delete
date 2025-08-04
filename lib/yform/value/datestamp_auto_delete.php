@@ -20,7 +20,7 @@ class rex_yform_value_datestamp_auto_delete extends rex_yform_value_datestamp
         if (false !== $currentValue && null !== $currentValue) {
             $timestamp = strtotime($currentValue . ' ' . $offset);
             if (false !== $timestamp) {
-                $value = date('Y-m-d h:i:s', $timestamp);
+                $value = date('Y-m-d H:i:s', $timestamp);
                 $this->setValue($value);
             }
         }
